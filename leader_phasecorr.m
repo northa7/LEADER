@@ -37,7 +37,7 @@ for i=1:Nappar
         yy = L_back(ind:inde);
         xx = AA\yy;
         % Debug: make sure we have a decreasing linear curve
-        if ( xx(1) > 0 )
+        if ( xx(1) > 0 || xx(2) < 0 )
             XX = [0; 1];
         else
             XX = xx;
