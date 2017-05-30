@@ -110,7 +110,7 @@ for i=1:norows
 end
 % Take only the observations done with this filter
 e_sun = e_sun(indeksit, :);
-e_eath = e_earth(indeksit, :);
+e_earth = e_earth(indeksit, :);
 dates = dates(indeksit);
 
 % Normalize
