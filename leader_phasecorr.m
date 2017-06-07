@@ -48,20 +48,26 @@ for i=1:Nappar
     end
 end
 
-% If we didn't get enough points, combine the apparitions
-if ( Nappar > 1 && any(pointsperapp < wanted) )
-    % Set the scaling according to the 1st apparition
+% Consider the measurements a single apparition, if they are all done
+% within the duration set by date_tol_appar
+if ( exist('dates') && ~isempty(dates) )
+    single_apparition = (dates(end)-dates(1) <= date_tol_appar);
+end
+% If we didn't get enough points, combine the sets
+% (don't combine if there are multiple apparitions!)
+if ( Nappar > 1 && any(pointsperapp < wanted) && single_apparition )
+    % Set the scaling according to the 1st set
     avg_scale = mean(L_back(1:pointsperapp(1)));
-    % Scale the other apparitions to this
+    % Scale the other sets to this
     for i=2:Nappar
         % The start and end indices of the data
         ind = sum(pointsperapp(1:i-1))+1;
         inde = ind+pointsperapp(i)-1;
         avg_temp = mean(L_back(ind:inde));
         scale_factor = avg_scale/avg_temp;
-        % Re-scale the apparition
+        % Re-scale the set
         L_back(ind:inde) = scale_factor * L_back(ind:inde);
     end
-    % After combining, we have only 1 effective apparition
+    % After combining, we have only 1 effective set
     Nappar_eff = 1;
 end

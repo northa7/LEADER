@@ -1,5 +1,5 @@
 % Computing the brightness functions and eta values
-% (WISE, synthetic version)
+% (Pan-STARRS1, synthetic version)
 
 % With a 75% chance, choose beta close to B_PEAK, otherwise random
 if ( rand <= 0.75 )
@@ -16,8 +16,8 @@ lambda = 2*pi*rand;
 % Choose random rotation period from 3..12 hours (units: days)
 Trot = 9/24*rand+3/24;
 
-% Get geometries from a WISE asteroid
-lcg_read_synth_WISE
+% Get geometries from a Pan-STARRS1 asteroid
+lcg_read_synth_PS1
 L_big2 = zeros(size(L_big));
 % Hapke parameters
 Hapke_param = [0.63, 0.04, 1.4, -0.4];
@@ -50,14 +50,14 @@ for i=1:length(L_big)
     % L-S & L brightness values for each face
     Ltemp = visible.*visible0.*ala.*(mu.*mu0./(mu+mu0)+0.1*mu.*mu0);
     
-    L_big2(i) = sum(Ltemp);  
+    L_big2(i) = sum(Ltemp); 
 end
 % Add noise to L
 L_big2 = L_big2 + 0.01*mean(L_big2)*randn(size(L_big2));
 
 % For each eta, the data must be measured
 % within a time span set by date_tol
-date_tol = 60;
+date_tol = 3;
 % The number of points wanted for an eta estimate
 wanted = 5;
 A = [];
@@ -74,7 +74,7 @@ while ( i < length(L_big2) )
     for j=i+1:length(L_big2)
         % Accept the data if the time span <= date_tol, quit otherwise
         if ( dates(j) - dates(i) <= date_tol )
-            L = [L; L_big2(j)];
+            L = [L; L_big2(j)];            
             % Close the loop in case it's the last measurement of the LC
             if ( j == length(L_big2) )
                 i_old = i;
