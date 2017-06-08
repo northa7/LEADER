@@ -27,6 +27,7 @@ In addition to this readme file and the license file, this software package incl
 We have also included optional, separate zip archives of
 * a small subpopulation of the WISE database (a sample to get started with the software package)
 * asteroid models from DAMIT (a sample that can be used with synthetic simulations)
+
 The archives contain separate installation instructions for their files.
 
 
@@ -48,7 +49,7 @@ Each application is started by running their main function in MATLAB environment
 This software is licensed under [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/legalcode).
 
 If you use LEADER in your research, please cite:
-Nortunen, H.; Kaasalainen, M.; *LEADER: fast estimates of asteroid shape elongation and spin latitude distributions from scarce photometry*, A&A.
+Nortunen, H.; Kaasalainen, M.; *LEADER: fast estimates of asteroid shape elongation and spin latitude distributions from scarce photometry*, A&A, 2017.
 
 
 ## Contact
